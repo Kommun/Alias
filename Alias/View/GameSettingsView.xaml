@@ -1,0 +1,79 @@
+﻿<Page
+    x:Class="Alias.View.GameSettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Alias.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Alias.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+
+        <Style TargetType="TextBlock" x:Key="hintStyle">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+    </Page.Resources>
+
+    <controls:HeaderedContentControl Header="Настройки">
+        <StackPanel Margin="20,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="Время раунда"
+                               FontSize="25"/>
+                    <TextBlock Text="продолжительность одного раунда"
+                               Style="{StaticResource hintStyle}"/>
+                </StackPanel>
+                <TextBlock Text="{Binding Value, ElementName=slDuration}"
+                           FontSize="40"
+                           Grid.Column="1"/>
+            </Grid>
+            <Slider Name="slDuration"
+                        Minimum="30"
+                        Maximum="120"
+                        Value="{Binding GameStat.Duration, Mode=TwoWay}"
+                        IntermediateValue="1"/>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="Количество слов"
+                               FontSize="25"/>
+                    <TextBlock Text="для победы"
+                               Style="{StaticResource hintStyle}"/>
+                </StackPanel>
+                <TextBlock Text="{Binding Value, ElementName=slGoal}"
+                           FontSize="40"
+                           Grid.Column="1"/>
+            </Grid>
+            <Slider Name="slGoal"
+                        Minimum="10"
+                        Maximum="100"
+                        Value="{Binding GameStat.Goal, Mode=TwoWay}"
+                        IntermediateValue="1"/>
+            <StackPanel>
+                <TextBlock Text="Последнее слово - для всех"
+                           FontSize="25"/>
+                <TextBlock Text="слово, не отгаданное в лимит времени, - могут отгадывать все"
+                           Style="{StaticResource hintStyle}"/>
+                <ToggleSwitch IsOn="{Binding GameStat.IsLastCommon,Mode=TwoWay}"/>
+            </StackPanel>
+        </StackPanel>
+        <controls:HeaderedContentControl.Footer>
+            <controls:CustomButton Content="Далее"
+                                   Command="{Binding AcceptCommand}"/>
+        </controls:HeaderedContentControl.Footer>
+    </controls:HeaderedContentControl>
+
+</Page>

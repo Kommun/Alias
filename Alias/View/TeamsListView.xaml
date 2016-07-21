@@ -1,0 +1,50 @@
+﻿<Page
+    x:Class="Alias.View.TeamsListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Alias.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Alias.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+
+        <DataTemplate x:Key="teamTemplate">
+            <Border BorderThickness="0,0,0,2"
+                    BorderBrush="White"
+                    Tapped="Grid_Tapped">
+                <TextBlock Text="{Binding Name}"
+                           FontSize="25"
+                           TextWrapping="WrapWholeWords"
+                           Margin="30,15"/>
+                <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem x:Name="btnEdit"
+                                        Text="Изменить"
+                                        Click="btnEdit_Click"/>
+                        <MenuFlyoutItem x:Name="btnDelete"
+                                        Text="Удалить"
+                                        Click="btnDelete_Click"/>
+                    </MenuFlyout>
+                </FlyoutBase.AttachedFlyout>
+            </Border>
+        </DataTemplate>
+
+    </Page.Resources>
+
+    <controls:HeaderedContentControl Header="Команды">
+        <ListView ItemsSource="{Binding GameStat.Teams}"
+                  ItemTemplate="{StaticResource teamTemplate}"/>
+        <controls:HeaderedContentControl.Footer>
+            <StackPanel>
+                <controls:CustomButton Content="Добавить команду"
+                                       Command="{Binding AddCommand}"/>
+                <controls:CustomButton Content="Далее"
+                                       Command="{Binding AcceptCommand}"/>
+            </StackPanel>
+        </controls:HeaderedContentControl.Footer>
+    </controls:HeaderedContentControl>
+
+</Page>

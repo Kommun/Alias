@@ -1,0 +1,68 @@
+﻿<Page
+    x:Class="Alias.View.WordsValidationView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Alias.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Alias.Controls"
+    xmlns:converters="using:Alias.Converters"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+
+        <converters:IsGuessedConverter x:Key="conv"/>
+
+        <DataTemplate x:Key="wordTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Text}"
+                           FontSize="25"
+                           VerticalAlignment="Center"
+                           Padding="15,0"/>
+                <StackPanel Orientation="Horizontal"
+                            Grid.Column="1">
+                    <StackPanel.Resources>
+                        <Style TargetType="controls:CustomButton">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BackgroundPressed" Value="Transparent"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Margin" Value="5"/>
+                            <Setter Property="Width" Value="40"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <controls:CustomButton Command="{Binding PlusCommand}"
+                                           CommandParameter="{Binding}"
+                                           Foreground="{Binding IsGuessed, Converter={StaticResource conv}, ConverterParameter=true}">
+                        <BitmapIcon UriSource="/Images/plus.png"/>
+                    </controls:CustomButton>
+                    <controls:CustomButton Command="{Binding MinusCommand}"
+                                           CommandParameter="{Binding}"
+                                           Foreground="{Binding IsGuessed, Converter={StaticResource conv}, ConverterParameter=false}">
+                        <BitmapIcon UriSource="/Images/minus.png"/>
+                    </controls:CustomButton>
+                    <controls:CustomButton Command="{Binding DeleteCommand}"
+                                           CommandParameter="{Binding}"
+                                           Foreground="{Binding IsGuessed, Converter={StaticResource conv}}">
+                        <BitmapIcon UriSource="/Images/delete.png"/>
+                    </controls:CustomButton>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+    </Page.Resources>
+
+    <controls:HeaderedContentControl Header="Корректировка">
+        <ListView ItemsSource="{Binding GameStat.CurrentTeam.Words}"
+                  ItemTemplate="{StaticResource wordTemplate}"
+                  SelectionMode="None"/>
+        <controls:HeaderedContentControl.Footer>
+            <controls:CustomButton Content="Сохранить"
+                                   Command="{Binding AcceptCommand}"/>
+        </controls:HeaderedContentControl.Footer>
+    </controls:HeaderedContentControl>
+</Page>

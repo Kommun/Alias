@@ -1,0 +1,45 @@
+﻿<Page
+    x:Class="Alias.View.MainMenuView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Alias.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:Alias.Converters"
+    xmlns:controls="using:Alias.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+
+        <converters:BooleanToVisibilityConverter x:Key="visConv"/>
+
+    </Page.Resources>
+
+    <Grid>
+        <StackPanel VerticalAlignment="Center"
+                    Margin="40,0">
+            <controls:CustomButton Content="Продолжить"
+                                   Command="{Binding ContinueCommand}"
+                                   Visibility="{Binding GameStat.Started, Converter={StaticResource visConv}}"/>
+            <controls:CustomButton Content="Новая игра"                                                                     
+                                   Command="{Binding NewGameCommand}"/>
+            <controls:CustomButton Content="Правила"
+                                   Command="{Binding RulesCommand}"/>
+            <controls:CustomButton Content="Магазин" Visibility="Collapsed"
+                                   Command="{Binding ShopCommand}"/>
+        </StackPanel>
+
+        <controls:CustomButton VerticalAlignment="Bottom"
+                               HorizontalAlignment="Center"
+                               Background="Transparent"
+                               BackgroundPressed="Transparent"
+                               Command="{Binding SoundCommand}">
+            <TextBlock Text="{Binding SoundIcon}"
+                       FontFamily="Segoe UI Symbol"
+                       Foreground="SteelBlue"
+                       FontSize="40"/>
+        </controls:CustomButton>
+    </Grid>
+
+</Page>

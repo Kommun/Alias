@@ -1,0 +1,39 @@
+﻿<Page
+    x:Class="Alias.View.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Alias"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Alias.Controls"
+    xmlns:adduplex="using:AdDuplex.Universal.Controls.WinPhone.XAML"
+    xmlns:converters="using:Alias.Converters"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+
+        <converters:InverseBooleanToVisibilityConverter x:Key="conv"/>
+
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <adduplex:AdControl AdUnitId="177427"
+                            AppKey="e6cca5db-d6b7-4513-948e-74bddd7f27f9"
+                            VerticalAlignment="Top"
+                            Visibility="{Binding Settings.IsFullVersion, Converter={StaticResource conv}}"/>
+        <Frame Name="frame"
+               Grid.Row="1">
+            <Frame.Background>
+                <ImageBrush ImageSource="/Images/18.png"
+                            Opacity="0.2"
+                            Stretch="UniformToFill"/>
+            </Frame.Background>
+        </Frame>
+    </Grid>
+
+</Page>
