@@ -28,8 +28,8 @@ namespace Alias.ViewModel
         public ThemesListViewModel()
         {
             var query = "Select * from Theme";
-            if (!AppSettings.Instance.IsFullVersion)
-                query += " where ThemeId in (1,2,3)";
+            if (!App.Settings.IsFullVersion)
+                query += $" where PackId in ({string.Join(",", App.Settings.AvailablePacks)})";
 
             Themes = DataBaseHelper.Connection.Query<Theme>(query);
         }

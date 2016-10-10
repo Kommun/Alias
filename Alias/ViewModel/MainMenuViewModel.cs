@@ -17,7 +17,7 @@ namespace Alias.ViewModel
         /// </summary>
         public string SoundIcon
         {
-            get { return AppSettings.Instance.IsSoundEnabled ? "\uE15D" : "\uE198"; }
+            get { return App.Settings.IsSoundEnabled ? "\uE15D" : "\uE198"; }
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Alias.ViewModel
         /// <param name="parameter"></param>
         private void Sound(object parameter = null)
         {
-            AppSettings.Instance.IsSoundEnabled = !AppSettings.Instance.IsSoundEnabled;
+            App.Settings.IsSoundEnabled = !App.Settings.IsSoundEnabled;
             OnPropertyChanged("SoundIcon");
         }
     }

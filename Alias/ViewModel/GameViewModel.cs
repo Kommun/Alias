@@ -138,7 +138,7 @@ namespace Alias.ViewModel
         /// <param name="volume">Громкость</param>
         public void Play(string soundPath, double volume = 1)
         {
-            if (AppSettings.Instance.IsSoundEnabled)
+            if (App.Settings.IsSoundEnabled)
                 try
                 {
                     _player.Volume = volume;

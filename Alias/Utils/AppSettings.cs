@@ -12,20 +12,9 @@ namespace Alias.Utils
 {
     public class AppSettings : PropertyChangedBase
     {
-        private static AppSettings _instance;
-        public static AppSettings Instance
-        {
-            get { return _instance ?? (_instance = new AppSettings()); }
-        }
+        public ApplicationDataContainer settings;
 
-        protected AppSettings()
-        {
-            settings = ApplicationData.Current.LocalSettings;
-        }
-
-        ApplicationDataContainer settings;
-
-        public void AddOrUpdateValue(string Key, Object value)
+        public void AddOrUpdateValue(string Key, object value)
         {
             if (settings.Values[Key] != value)
                 settings.Values[Key] = value;
@@ -65,6 +54,8 @@ namespace Alias.Utils
         }
 
         #endregion
+
+        public List<int> AvailablePacks { get; set; }
 
         public int DBversion
         {

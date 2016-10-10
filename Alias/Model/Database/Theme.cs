@@ -10,10 +10,15 @@ namespace Alias.Model.Database
     public class Theme
     {
         /// <summary>
-        /// ID
+        /// ID темы
         /// </summary>
-        [PrimaryKey,AutoIncrement]
+        [PrimaryKey, AutoIncrement]
         public int ThemeId { get; set; }
+
+        /// <summary>
+        /// ID набора (магазинного)
+        /// </summary>
+        public int PackId { get; set; }
 
         /// <summary>
         /// Название темы

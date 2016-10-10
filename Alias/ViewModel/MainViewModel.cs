@@ -7,12 +7,15 @@ using Alias.Utils;
 
 namespace Alias.ViewModel
 {
-   public class MainViewModel
+    public class MainViewModel
     {
         /// <summary>
         /// Настройки
         /// </summary>
-        public AppSettings Settings { get; set; } = AppSettings.Instance;
+        public AppSettings Settings
+        {
+            get { return App.Settings; }
+        }
 
         /// <summary>
         /// Конструктор

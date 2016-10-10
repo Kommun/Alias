@@ -34,6 +34,8 @@ namespace Alias
     public sealed partial class App : Application
     {
         public static NavigationService NavigationService { get; set; }
+        public static AppSettings Settings { get; } = new AppSettings();
+
         private TransitionCollection transitions;
 
         /// <summary>
@@ -72,27 +74,36 @@ namespace Alias
             // Hide the status bar
             await StatusBar.GetForCurrentView().HideAsync();
 
-            if (AppSettings.Instance.DBversion != DataBaseHelper.dbVersion)
+            if (Settings.DBversion != DataBaseHelper.dbVersion)
             {
                 await CopyDatabase();
-                AppSettings.Instance.DBversion = DataBaseHelper.dbVersion;
+                Settings.DBversion = DataBaseHelper.dbVersion;
             }
 
-            AppSettings.Instance.Runs++;
-            if (AppSettings.Instance.NotRated && AppSettings.Instance.Runs == 4)
+            Settings.Runs++;
+            if (Settings.NotRated && Settings.Runs == 4)
             {
                 MessageDialog msgbox = new MessageDialog("Вы пользуетесь приложением уже достаточно долго. Не могли бы Вы оставить о нем отзыв?");
 
                 msgbox.Commands.Add(new UICommand("Да", async c =>
                 {
                     await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + CurrentApp.AppId));
-                    AppSettings.Instance.NotRated = false;
+                    Settings.NotRated = false;
                 }));
                 msgbox.Commands.Add(new UICommand("Нет"));
 
                 await msgbox.ShowAsync();
-                AppSettings.Instance.Runs = 0;
+                Settings.Runs = 0;
             }
+
+            // Заполняем список доступных наборов слов
+            foreach (var l in CurrentApp.LicenseInformation.ProductLicenses.Where(l => l.Value.IsActive))
+                switch (l.Key)
+                {
+                    case "BigPack":
+                        Settings.AvailablePacks.Add(1);
+                        return;
+                }
 
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)

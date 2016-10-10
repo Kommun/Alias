@@ -86,7 +86,7 @@ namespace Alias.ViewModel
             if (!string.IsNullOrEmpty(name.Trim()))
             {
                 if (name.ToLower() == "ihavealreadybought")
-                    AppSettings.Instance.IsFullVersion = true;
+                    App.Settings.IsFullVersion = true;
                 else
                     team.Name = name;
             }
