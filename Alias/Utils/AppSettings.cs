@@ -12,8 +12,21 @@ namespace Alias.Utils
 {
     public class AppSettings : PropertyChangedBase
     {
-        public ApplicationDataContainer settings;
+        private ApplicationDataContainer settings;
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        public AppSettings()
+        {
+            settings = ApplicationData.Current.LocalSettings;
+        }
+
+        /// <summary>
+        /// Добавить или обновить значение
+        /// </summary>
+        /// <param name="Key"></param>
+        /// <param name="value"></param>
         public void AddOrUpdateValue(string Key, object value)
         {
             if (settings.Values[Key] != value)
@@ -21,6 +34,13 @@ namespace Alias.Utils
             OnPropertyChanged(Key);
         }
 
+        /// <summary>
+        /// Извлечить значение
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="Key"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
         public T GetValueOrDefault<T>(string Key, T defaultValue)
         {
             T value;
@@ -55,7 +75,7 @@ namespace Alias.Utils
 
         #endregion
 
-        public List<int> AvailablePacks { get; set; }
+        public List<int> AvailablePacks { get; set; } = new List<int>();
 
         public int DBversion
         {

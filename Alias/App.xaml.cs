@@ -96,9 +96,11 @@ namespace Alias
                 Settings.Runs = 0;
             }
 
-            // Заполняем список доступных наборов слов
-            foreach (var l in CurrentApp.LicenseInformation.ProductLicenses.Where(l => l.Value.IsActive))
-                switch (l.Key)
+            // Набор слов по умолчанию
+            Settings.AvailablePacks.Add(0);
+            // Заполняем список купленных наборов слов
+            foreach (var license in CurrentApp.LicenseInformation.ProductLicenses.Where(l => l.Value.IsActive))
+                switch (license.Key)
                 {
                     case "BigPack":
                         Settings.AvailablePacks.Add(1);

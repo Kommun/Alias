@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,6 +23,9 @@ namespace Alias.View
     {
         private GameViewModel _vm;
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
         public GameView()
         {
             this.InitializeComponent();
@@ -54,17 +58,49 @@ namespace Alias.View
         {
             var velocity = e.Velocities;
             if (Math.Abs(velocity.Linear.Y) > Math.Abs(velocity.Linear.X))
-                await _vm.Next(velocity.Linear.Y < 0);
+                await GoToNextWord(velocity.Linear.Y < 0);
         }
 
+        /// <summary>
+        /// Обработчик нажатия на верхнюю стрелку
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void UpArrow_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            await _vm.Next(true);
+            await GoToNextWord(true);
         }
 
+        /// <summary>
+        /// Обработчик нажатия на нижнюю стрелку
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void DownArrow_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            await _vm.Next(false);
+            await GoToNextWord(false);
+        }
+
+        /// <summary>
+        /// Перейти к следующему слову
+        /// </summary>
+        /// <param name="isGuessed">Угадано ли текущее слово</param>
+        /// <returns></returns>
+        private async Task GoToNextWord(bool isGuessed)
+        {
+            tbWord.FontSize = 40;
+            await _vm.Next(isGuessed);
+        }
+
+        /// <summary>
+        /// Обработчик изменения размера текстового поля
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tbWord_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (tbWord.ActualWidth > grdCard.ActualWidth)
+                tbWord.FontSize--;
         }
     }
 }

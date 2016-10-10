@@ -117,14 +117,17 @@
             <Image Source="/Images/card.png"
                    Stretch="Fill"/>
 
-            <!--Текущее слово-->
-            <TextBlock Text="{Binding CurrentWord.Text}"
-                       TextAlignment="Center"
-                       TextWrapping="WrapWholeWords"
-                       FontSize="40"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       Margin="10,0"/>
+            <Grid Name="grdCard"
+                  Margin="10,0">
+                <!--Текущее слово-->
+                <TextBlock Name="tbWord" Text="{Binding CurrentWord.Text}"
+                           SizeChanged="tbWord_SizeChanged"
+                           TextAlignment="Center"
+                           TextWrapping="WrapWholeWords"
+                           FontSize="40"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
+            </Grid>
 
             <!--Категория слова-->
             <TextBlock Text="{Binding CurrentWord.Name}"

@@ -26,7 +26,7 @@
                                    Command="{Binding NewGameCommand}"/>
             <controls:CustomButton Content="Правила"
                                    Command="{Binding RulesCommand}"/>
-            <controls:CustomButton Content="Магазин" Visibility="Collapsed"
+            <controls:CustomButton Content="Магазин"
                                    Command="{Binding ShopCommand}"/>
         </StackPanel>
 

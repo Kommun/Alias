@@ -33,7 +33,7 @@
                   Margin="20,0"/>
             <controls:CustomButton Content="+ Добавить наборы слов"
                                    Command="{Binding ShopCommand}"
-                                   Background="Transparent" Visibility="Collapsed"/>
+                                   Background="Transparent"/>
         </StackPanel>
         <controls:HeaderedContentControl.Footer>
             <controls:CustomButton Content="Готово"
