@@ -48,7 +48,7 @@ namespace Alias.Controls
         }
 
         public static readonly DependencyProperty FooterProperty =
-            DependencyProperty.Register("Footer", typeof(object), typeof(HeaderedContentControl), null);
+            DependencyProperty.Register("Footer", typeof(object), typeof(HeaderedContentControl), new PropertyMetadata(new Grid()));
 
         #endregion
 

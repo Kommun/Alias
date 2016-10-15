@@ -10,7 +10,7 @@ namespace Alias
 {
     public static class DataBaseHelper
     {
-        public const int dbVersion = 2;
+        public const int dbVersion = 3;
 
         private static string _dbPath = System.IO.Path.Combine(System.IO.Path.Combine(ApplicationData.Current.LocalFolder.Path, "alias.db"));
         private static SQLiteConnection _connection;

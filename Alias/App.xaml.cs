@@ -96,16 +96,7 @@ namespace Alias
                 Settings.Runs = 0;
             }
 
-            // Набор слов по умолчанию
-            Settings.AvailablePacks.Add(0);
-            // Заполняем список купленных наборов слов
-            foreach (var license in CurrentApp.LicenseInformation.ProductLicenses.Where(l => l.Value.IsActive))
-                switch (license.Key)
-                {
-                    case "BigPack":
-                        Settings.AvailablePacks.Add(1);
-                        return;
-                }
+            GameStat.Instance.FillThemesList();
 
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)

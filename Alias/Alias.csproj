@@ -99,6 +99,7 @@
     <Compile Include="Model\Database\Word.cs" />
     <Compile Include="Model\GameStat.cs" />
     <Compile Include="Model\GameWord.cs" />
+    <Compile Include="Model\ShopItem.cs" />
     <Compile Include="Model\Team.cs" />
     <Compile Include="SQLite.cs" />
     <Compile Include="SQLiteAsync.cs" />

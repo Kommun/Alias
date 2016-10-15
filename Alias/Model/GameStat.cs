@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Store;
 using Alias.Model;
 using Alias.Model.Database;
 using Alias.Utils;
@@ -112,6 +113,25 @@ namespace Alias.Model
             var data = await _serializationManager.Restore<GameStat>();
             if (data != null)
                 Instance = data;
+        }
+
+        /// <summary>
+        /// Заполнить список доступных наборов слов
+        /// </summary>
+        public void FillThemesList()
+        {
+            App.Settings.AvailablePacks.Clear();
+
+            // Набор слов по умолчанию
+            App.Settings.AvailablePacks.Add(0);
+            // Заполняем список купленных наборов слов
+            foreach (var license in CurrentApp.LicenseInformation.ProductLicenses.Values.Where(l => l.IsActive))
+                switch (license.ProductId)
+                {
+                    case "BigPack":
+                        App.Settings.AvailablePacks.Add(1);
+                        return;
+                }
         }
 
         #endregion

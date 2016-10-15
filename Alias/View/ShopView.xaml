@@ -5,10 +5,60 @@
     xmlns:local="using:Alias.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Alias.Controls"
+    xmlns:converters="using:Alias.Converters"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Name="root">
 
-    <Grid>
+    <Page.Resources>
 
-    </Grid>
+        <converters:BooleanToVisibilityConverter x:Key="conv"/>
+
+        <DataTemplate x:Key="shopItemTemplate">
+            <controls:CustomButton Command="{Binding DataContext.BuyCommand, ElementName=root}"
+                                   CommandParameter="{Binding}"
+                                   Background="Transparent"
+                                   BorderThickness="4"
+                                   BorderBrush="SteelBlue"
+                                   HorizontalAlignment="Stretch"
+                                   HorizontalContentAlignment="Stretch"
+                                   IsEnabled="{Binding IsEnabled}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}"
+                                   FontSize="22"/>
+                        <TextBlock Text="{Binding Description}"
+                                   TextWrapping="WrapWholeWords"
+                                   FontSize="17"
+                                   Foreground="Gray"/>
+                        <TextBlock Text="{Binding Price}"
+                               HorizontalAlignment="Center"
+                               FontSize="22"
+                               Grid.Column="1"/>
+                    </StackPanel>
+                </Grid>
+            </controls:CustomButton>
+        </DataTemplate>
+
+    </Page.Resources>
+
+    <controls:HeaderedContentControl Header="Магазин">
+        <Grid>
+            <ScrollViewer>
+                <ItemsControl ItemsSource="{Binding ShopItems}"
+                              ItemTemplate="{StaticResource shopItemTemplate}"
+                              VerticalAlignment="Center"
+                              Margin="20,0"/>
+            </ScrollViewer>
+            <ProgressBar IsIndeterminate="{Binding IsLoading}"
+                         Visibility="{Binding IsLoading, Converter={StaticResource conv}}"
+                         VerticalAlignment="Center"/>
+        </Grid>
+    </controls:HeaderedContentControl>
+
 </Page>

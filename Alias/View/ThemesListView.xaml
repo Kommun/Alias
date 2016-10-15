@@ -25,16 +25,18 @@
     </Page.Resources>
 
     <controls:HeaderedContentControl Header="Выберите наборы слов">
-        <StackPanel>
-            <ListView Name="lvThemes"
-                  ItemsSource="{Binding Themes}"
-                  ItemTemplate="{StaticResource themeTemplate}"
-                  SelectionMode="Multiple"
-                  Margin="20,0"/>
-            <controls:CustomButton Content="+ Добавить наборы слов"
-                                   Command="{Binding ShopCommand}"
-                                   Background="Transparent"/>
-        </StackPanel>
+        <ScrollViewer>
+            <StackPanel>
+                <ListView Name="lvThemes"
+                          ItemsSource="{Binding Themes}"
+                          ItemTemplate="{StaticResource themeTemplate}"
+                          SelectionMode="Multiple"
+                          Margin="20,0"/>
+                <controls:CustomButton Content="+ Добавить наборы слов"
+                                       Command="{Binding ShopCommand}"
+                                       Background="Transparent"/>
+            </StackPanel>
+        </ScrollViewer>
         <controls:HeaderedContentControl.Footer>
             <controls:CustomButton Content="Готово"
                                    Click="btnAccept_Click"/>
