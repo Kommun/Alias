@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Alias.Utils;
 
 namespace Alias.Model
 {
-    public class ShopItem
+    public class ShopItem : PropertyChangedBase
     {
+        private bool _isBought;
+
         /// <summary>
         /// Название продукта
         /// </summary>
@@ -31,7 +34,15 @@ namespace Alias.Model
         /// <summary>
         /// Куплен ли товар
         /// </summary>
-        public bool IsBought { get; set; }
+        public bool IsBought
+        {
+            get { return _isBought; }
+            set
+            {
+                _isBought = value;
+                OnPropertiesChanged("IsBought", "Price", "IsEnabled");
+            }
+        }
 
         /// <summary>
         /// Отображаемая цена

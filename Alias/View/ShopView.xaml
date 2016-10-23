@@ -31,6 +31,7 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel>
                         <TextBlock Text="{Binding Name}"
+                                   TextWrapping="WrapWholeWords"
                                    FontSize="22"/>
                         <TextBlock Text="{Binding Description}"
                                    TextWrapping="WrapWholeWords"

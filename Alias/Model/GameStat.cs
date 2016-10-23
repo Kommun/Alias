@@ -131,6 +131,9 @@ namespace Alias.Model
                     case "BigPack":
                         App.Settings.AvailablePacks.Add(1);
                         return;
+                    case "CelebritiesPack":
+                        App.Settings.AvailablePacks.Add(2);
+                        return;
                 }
         }
 

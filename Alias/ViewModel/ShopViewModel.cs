@@ -57,10 +57,8 @@ namespace Alias.ViewModel
             IsLoading = true;
             try
             {
-                var products = await CurrentApp.LoadListingInformationAsync();
+                var products = await CurrentApp.LoadListingInformationByProductIdsAsync(new List<string> { "BigPack", "CelebritiesPack" });
                 ShopItems = products.ProductListings.Values
-                    // Отображать только BigPack, потому что остальные не реализованы
-                    .Where(p => p.ProductId == "BigPack")
                     .Select(p => new ShopItem
                     {
                         Name = p.Name,
@@ -88,8 +86,11 @@ namespace Alias.ViewModel
             try
             {
                 var result = await CurrentApp.RequestProductPurchaseAsync(product.ProductId);
-                if (result.Status == ProductPurchaseStatus.Succeeded)
-                    GameStat.Instance.FillThemesList();
+                if (result.Status != ProductPurchaseStatus.Succeeded)
+                    return;
+
+                product.IsBought = true;
+                GameStat.Instance.FillThemesList();
             }
             catch { }
         }
